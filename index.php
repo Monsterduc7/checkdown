@@ -1,16 +1,19 @@
 <?php
   include "inc/config.php";
 
-	
-
-
 	/* Sorting */
 	$sql = "SELECT * FROM roster";
 
-	if($_GET['sort'] == 'name')
-	{
-	    $sql .= " ORDER BY name";
+	if (isset($_GET['sort'])) {
+		if($_GET['sort'] == 'nr')
+		{
+		    $sql .= " ORDER BY nr";
+		}
+		elseif ($_GET['sort'] == 'name') {
+			$sql .= " ORDER BY name";
+		}
 	}
+
 
 
 ?>
@@ -60,7 +63,7 @@
 					<span class="input-group-addon" >Talent</span>
 					<input name="talent" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 
-					<span class="input-group-addon" >Salary</span>
+					<span class="input-group-addon" >Sallery</span>
 					<input name="sallery" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 
 					<span class="input-group-addon" >Contract Years</span>
@@ -70,35 +73,38 @@
 			</form>
 
 				<div class="btn-toolbar">
-				    <button class="btn btn-primary">New User</button>
-				    <button class="btn">Import</button>
-				    <button class="btn">Export</button>
+
 				</div>
 				<div class="well">
 				    <table class="table">
 				      <thead>
 				        <tr>
 				          <th>#</th>
+				          <th>Position</th>
 				          <th><a href="index.php?sort=name">Name</a></th>
 				          <th>Age</th>
 				          <th>Overall</th>
+				          <th>Talent</th>
+				          <th>Sallery</th>
+				          <th>Contract Years</th>
 				          <th style="width: 36px;"></th>
 				        </tr>
 				      </thead>
 				      <tbody>
-					      <?php
-							//$sql = "SELECT * FROM roster";
+
+				      <?php
 					      echo $sql;
 							foreach ($dbh->query($sql) as $row) {
 								 echo '<tr>';
-								 echo '<td>' . $row["id"] . ' </td>';
-								 echo '<td>' . $row["name"] . ' </td>';
-
-						         echo '<td>';
-						         echo '<a href="user.html"><i class="icon-pencil"></i></a>';
-						         echo '<a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>';
-						          echo '</td>';
-						        echo '</tr>';
+								 	echo '<td>' . $row["nr"] . ' </td>';
+								 	echo '<td>' . $row["position"] . ' </td>';
+								 	echo '<td>' . $row["name"] . ' </td>';
+								 	echo '<td>' . $row["age"] . ' </td>';
+								 	echo '<td>' . $row["overall"] . ' </td>';
+								 	echo '<td>' . $row["talent"] . ' </td>';
+								 	echo '<td>' . $row["sallery"] . ' </td>';
+								 	echo '<td>' . $row["contract"] . ' </td>';
+						         echo '</tr>';
 							}
 							echo '</table>';
 						?>
@@ -132,35 +138,12 @@
 		echo 'overall: ' . $overall . '<br>';
 		*/
 		/* ## PDO ## */
-		//$sql= 'INSERT INTO roster(nr, position, name, age, overall, talent, sallery, contract) VALUES (":nr", ":position", ":name", ":age", ":overall", ":talent", ":sallery", ":contract")'; /*("'.$nr.','.$position.','.$name.','.$age.','.$overall.','.$talent.','.$sallery.','.$contract.'")*/
-		//$stmt = $dbh->prepare($sql);
+		$sql= 'INSERT INTO roster(nr, position, name, age, overall, talent, sallery, contract) VALUES("'.$nr.'", "'.$position.'", "'.$name.'", "'.$age.'", "'.$overall.'", "'.$talent.'", "'.$sallery.'", "'.$contract.'")';
 
-		/*$stmt->bindValue(':nr', $nr);
-		$stmt->bindValue(':position', $position);
-		$stmt->bindValue(':name', $name);
-		$stmt->bindValue(':age', $age);
-		$stmt->bindValue(':overall', $overall);
-		$stmt->bindValue(':talent', $talent);
-		$stmt->bindValue(':sallery', $sallery);
-		$stmt->bindValue(':contract', $contract);*/
+		$stmt = $dbh->prepare($sql);
 		
-		/*$stmt->execute(array(
-		    ":nr" => $nr,
-		    ":position" => $nr,
-		    ":name" => $name,
-		    ":age" => $age,
-		    ":talent" => $talent,
-		    ":sallery" => $sallery,
-		    ":contract" => $contract
-
-		));
-		echo $sql;*/
-		//$stmt->execute();
-
-		
-
-
-
+		$stmt->execute();
+		echo $sql;
 
 	}
 
