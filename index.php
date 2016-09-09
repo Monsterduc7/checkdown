@@ -93,23 +93,23 @@
 					<span class="input-group-addon" >Position</span>
 					<input name="position" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 
-	       			<span class="input-group-addon" >Name</span>
-					<input name="name" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-
-					<span class="input-group-addon" >Age</span>
-					<input name="age" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-
 					<span class="input-group-addon" >Overall</span>
 					<input name="overall" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+
+	       			<span class="input-group-addon" >Name</span>
+					<input name="name" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 
 					<span class="input-group-addon" >Talent</span>
 					<input name="talent" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 
-					<span class="input-group-addon" >Sallery</span>
-					<input name="sallery" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+					<span class="input-group-addon" >Age</span>
+					<input name="age" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 
 					<span class="input-group-addon" >Contract Years</span>
 					<input name="contract" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+					
+					<span class="input-group-addon" >Sallery</span>
+					<input name="sallery" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 				</div>
 					<div style="padding-top: 20px; padding-bottom: 50px">
 		    			<button name="SaveAddRoster" type="submit" class="btn btn-primary pull-right" >Add to Roster</button>
@@ -125,12 +125,12 @@
 				        <tr>
 				          <th><a href="index.php?sort=nr">#</a></th>
 				          <th><a href="index.php?sort=position">Position</a></th>
-				          <th><a href="index.php?sort=name">Name</a></th>
-				          <th><a href="index.php?sort=age">Age</a></th>
 				          <th><a href="index.php?sort=overall">Overall</a></th>
+				          <th><a href="index.php?sort=name">Name</a></th>
 				          <th><a href="index.php?sort=talent">Talent</a></th>
-				          <th><a href="index.php?sort=sallery">Sallery</a></th>
+				          <th><a href="index.php?sort=age">Age</a></th>
 				          <th><a href="index.php?sort=contract">Contract Years</a></th>
+				          <th><a href="index.php?sort=sallery">Sallery</a></th>
 				          <th style="width: 36px;"></th>
 				        </tr>
 				      </thead>
@@ -139,16 +139,15 @@
 				      <?php
 					      echo $sql;
 							foreach ($dbh->query($sql) as $row) {
-								 	echo $row["id"] . "<br>";
 								 echo '<tr>';
 								 	echo '<td>' . $row["nr"] . ' </td>';
 								 	echo '<td>' . $row["position"] . ' </td>';
-								 	echo '<td>' . $row["name"] . ' </td>';
-								 	echo '<td>' . $row["age"] . ' </td>';
 								 	echo '<td>' . $row["overall"] . ' </td>';
+								 	echo '<td>' . $row["name"] . ' </td>';
 								 	echo '<td>' . $row["talent"] . ' </td>';
-								 	echo '<td>' . $row["sallery"] . ' </td>';
+								 	echo '<td>' . $row["age"] . ' </td>';
 								 	echo '<td>' . $row["contract"] . ' </td>';
+								 	echo '<td>' . $row["sallery"] . ' </td>';
 					 		
 								 	echo '<td> 
 								 		<form name="DeleteFromRoster" action="index.php?delete='.$row["id"].' " method="POST">
